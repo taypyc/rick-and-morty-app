@@ -1,7 +1,7 @@
 # Rick and Morty Character Viewer
 
 ## Objective
-Create a web application that allows users to browse and view characters from the Rick and Morty series using data from the [Rick and Morty API](https://rickandmortyapi.com/).
+This web application based on the Rick and Morty series using data from the [Rick and Morty API](https://rickandmortyapi.com/).
 
 ## Requirements
 
