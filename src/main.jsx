@@ -10,7 +10,8 @@ import theme from './styles/theme';
 import { GlobalStyles } from './styles/global'
 import CharactersList from './components/CharactersList/charactersList';
 import CharacterDetails from './components/CharacterDetails/characterDetails';
-import ErrorPage from "./components/ErrorPage/error-page";
+import ErrorPage from './components/ErrorPage/error-page';
+import FilterForm from './components/FilterForm/filterForm';
 
 const router = createBrowserRouter([
   {
@@ -27,8 +28,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <GlobalStyles />
+      <GlobalStyles />      
       <main>
+        <FilterForm />
         <RouterProvider router={router} />
       </main>
     </ThemeProvider>
