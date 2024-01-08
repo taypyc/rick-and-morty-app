@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import styled, { css } from 'styled-components';
+import Typography from '@mui/material/Typography';
 
 const CharacterDetails = () => {
   const { id } = useParams();
@@ -50,8 +51,10 @@ const CharacterDetails = () => {
     <>
       {character && (
         <>
-          <header>
-            <h1>{character.name}</h1>
+          <header>            
+            <Typography variant="h1">
+              {character.name}
+            </Typography>
           </header>
 
           <CharacterCardWrapper>

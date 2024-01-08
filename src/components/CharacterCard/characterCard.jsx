@@ -10,12 +10,17 @@ const Container = styled.article(
     background: #3c3e44;
     display: flex;
     border-radius: ${theme.spacing._8};
-    box-shadow: ${theme.shadows.md};
 
-    ${theme.media.phone(css`      
-      flex-direction: column;
-      height: initial;
+    ${theme.media.tablet(css`
       width: 100%;
+      max-width: 100%;
+      height: 300px;
+    `)}
+
+
+    ${theme.media.phone(css`
+      flex-direction: column;
+      height: initial;      
     `)}
   `,
 );

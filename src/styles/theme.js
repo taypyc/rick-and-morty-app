@@ -23,6 +23,11 @@ const media = {
       ${inner}
     }
   `,
+  tablet: (inner) => css`
+    @media (max-width: ${1165 / 16}em) {
+      ${inner}
+    }
+  `,
   mobile: (inner) => css`
     @media (max-width: ${890 / 16}em) {
       ${inner}

@@ -45,7 +45,7 @@ const CharactersList = () => {
         setTotalPages(response.data.info.pages);        
       })
       .catch(error => { 
-        console.error('Error fetching characters:', error);
+        console.error('Error fetching characters:', error);        
       });
   }, [page, totalPages]);
 
@@ -56,7 +56,9 @@ const CharactersList = () => {
   return (
     <>
       <header>
-        <h1>Characters List</h1>
+        <Typography variant="h1">
+          Rick and Morty Characters List
+        </Typography>        
       </header>      
       <CharactersWrapper>
         {characters.map(character => (

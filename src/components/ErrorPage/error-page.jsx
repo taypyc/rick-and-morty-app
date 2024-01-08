@@ -1,16 +1,41 @@
+import styled, { css } from 'styled-components';
+import Typography from '@mui/material/Typography';
 import { useRouteError } from "react-router-dom";
 
 export default function ErrorPage() {
   const error = useRouteError();
-  console.error(error);
+
+  const ErrorWrapper = styled.div`
+  ${({ theme }) => {    
+    return css`      
+      display: flex;
+      max-width: 600px;
+      margin: auto;
+      height: 220px;
+      overflow: hidden;
+      background: #3c3e44;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: ${theme.spacing._16};
+      border-radius: ${theme.spacing._8};      
+    `
+  }}
+`
 
   return (
-    <div id="error-page">
-      <h1>Oops!</h1>
-      <p>Sorry, an unexpected error has occurred.</p>
-      <p>
-        <i>{error.statusText || error.message}</i>
-      </p>
-    </div>
+    <>
+      <header>
+        <Typography variant="h1">
+          Oops!
+        </Typography>
+      </header>
+      <ErrorWrapper>        
+        <p>
+          Page <i>{error.statusText.toLowerCase() || error.message.toLowerCase()}</i>
+        </p>
+      </ErrorWrapper>      
+    </>
   );
 }
