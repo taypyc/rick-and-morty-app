@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
@@ -6,7 +5,7 @@ const Container = styled.article(
   ({ theme }) => css`  
     width: 49.5%;
     max-width: 600px;
-    height: 200px;
+    height: 220px;
     overflow: hidden;
     background: #3c3e44;
     display: flex;
@@ -49,7 +48,7 @@ const ContentWrapper = styled.div`
     }
 
     return css`
-      flex: 3;
+      flex: 2;
       position: relative;
       padding: ${theme.spacing._12} ${theme.spacing._12};
       color: ${theme.white};
