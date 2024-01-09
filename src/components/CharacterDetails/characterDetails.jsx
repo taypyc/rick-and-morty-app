@@ -4,6 +4,35 @@ import axios from 'axios';
 import styled, { css } from 'styled-components';
 import Typography from '@mui/material/Typography';
 
+const CharacterCardWrapper = styled.div(
+  ({theme}) => css`    
+    display: flex;
+    gap: ${theme.spacing._20};
+    width: 600px;
+    max-width: 100%;      
+    margin: 0 auto;
+    padding: ${theme.spacing._40} ${theme.spacing._16} 0;
+`,
+)
+  
+const CharacterImage = styled.div(
+  ({theme}) => css`
+    max-width: 300px;
+    max-height: 300px;
+    border-radius: ${theme.spacing._8};
+    overflow: hidden;
+`,
+)
+
+const CharacterInfo = styled.div(
+  ({theme}) => css`
+    max-width: 300px;
+    max-height: 300px;
+    border-radius: ${theme.spacing._8};
+    overflow: hidden;
+`,
+)
+
 const CharacterDetails = () => {
   const { id } = useParams();
   const [character, setCharacter] = useState(null);
@@ -17,36 +46,7 @@ const CharacterDetails = () => {
         console.error('Error fetching character details:', error);
       });
   }, [id]);
-
-  const CharacterCardWrapper = styled.div(
-    ({theme}) => css`    
-      display: flex;
-      gap: ${theme.spacing._20};
-      width: 600px;
-      max-width: 100%;      
-      margin: 0 auto;
-      padding: ${theme.spacing._40} ${theme.spacing._16} 0;
-  `,
-  )
-    
-  const CharacterImage = styled.div(
-    ({theme}) => css`
-      max-width: 300px;
-      max-height: 300px;
-      border-radius: ${theme.spacing._8};
-      overflow: hidden;
-  `,
-  )
-
-  const CharacterInfo = styled.div(
-    ({theme}) => css`
-      max-width: 300px;
-      max-height: 300px;
-      border-radius: ${theme.spacing._8};
-      overflow: hidden;
-  `,
-  )
-
+  
   return (
     <>
       {character && (
