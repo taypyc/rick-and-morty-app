@@ -45,7 +45,7 @@ const ImgWrapper = styled.div(
 )
 
 const ContentWrapper = styled.div`
-  ${({ theme, status }) => {
+  ${({ theme, $status }) => {
     const statusColor = {
       alive: theme.green,
       dead: theme.red,
@@ -109,7 +109,7 @@ const ContentWrapper = styled.div`
           height: ${theme.spacing._8};
           width: ${theme.spacing._8};
           margin-right: ${theme.spacing.rem(6)};
-          background: ${statusColor[status]};
+          background: ${statusColor[$status]};
           border-radius: 50%;
         }
       }
@@ -129,7 +129,7 @@ const CharacterCard = ({ character }) => {
           <img src={character.image} alt={character.name} />
         </Link>
       </ImgWrapper>
-      <ContentWrapper status={character.status.toLowerCase()}>
+      <ContentWrapper $status={character.status.toLowerCase()}>
         <div className="section">
           <h2>
             <Link to={`/character/${character.id}`}>

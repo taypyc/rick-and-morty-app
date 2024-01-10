@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import TuneIcon from '@mui/icons-material/Tune';
 import CloseIcon from '@mui/icons-material/Close';
 import styled, { css } from 'styled-components';
@@ -9,7 +9,6 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 
 const CharacterFilterButton = styled.div(
@@ -21,7 +20,7 @@ const CharacterFilterButton = styled.div(
         height: ${theme.spacing._40}; 
         background: ${theme.backBlack};
         cursor: pointer;
-        ${theme.mixins.flex};
+        ${theme.mixins.flex};        
         z-index: 11;        
     `,
 )
@@ -37,9 +36,10 @@ const CharacterFilterForm = styled.div(
         color: ${theme.white};
         background: ${theme.white};
         ${theme.mixins.flex};
+        flex-direction: column;
         transform: translateX(100%);
         transition: all 1s cubic-bezier(0.6, -0.28, 0.74, 0.05);
-        padding: calc(${theme.spacing._40} * 2) ${theme.spacing._40};
+        padding: calc(${theme.spacing._40} * 2) ${theme.spacing._20} ${theme.spacing._20};
         overflow: auto;
 
         &.toggle {
@@ -49,108 +49,134 @@ const CharacterFilterForm = styled.div(
     `,
 )
 
-const FilterForm = ({ sendDataToParent }) => {
-    const [isFormOpened, setIsFormOpened] = useState(false);
-    const filterData = {
-        name: '',
-        status: 'alive',
-        species: 'alien',
-        gender: 'male',
-    };
-    /*const [filterData, setFilterData] = useState([{
-        name: '',
-        status: 'alive',
-        species: 'alien',
-        gender: 'male',
-    }]);*/
+// Memoize the component using React.memo
+const FilterForm = React.memo(
+    ({ sendDataToParent}) => {        
+        const [isFormOpened, setIsFormOpened] = useState(false);
+        const [name, setName] = useState('');
+        const [status, setStatus] = useState('alive');
+        const [species, setSpecies] = useState('alien');        
+        const [gender, setGender] = useState('male');
+        
+        const handleClick = () => {
+            setIsFormOpened(!isFormOpened);
+        }    
+    
+        const handleInputChange = (e) => {
+            const { name, value } = e.target;            
 
-    const handleClick = () => {
-        setIsFormOpened(!isFormOpened);
-    }
+            const stateUpdates = {
+                name: setName,
+                status: setStatus,
+                species: setSpecies,
+                gender: setGender
+            };
 
-    const handleSubmit = () => {
+            if (stateUpdates[name]) {
+                stateUpdates[name](value);                
+            }            
+        }
+    
+        const handleSubmitButton = () => {                                    
+            sendDataToParent(name, status, species, gender)
+        }
+        
+    
+        return (
+            <>            
+                <CharacterFilterForm
+                    {...(isFormOpened ? { 'className': 'toggle' } : {})}
+                >   
+                    <Box
+                        component="form"
+                        sx={{
+                            '&': { width: '100%',
+                                height: '100%',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                flexDirection: 'column'
+                            },
+                        }}
+                        onChange={handleInputChange}
+                    >
+                        <Box
+                            component="div"
+                            sx={{
+                                '&': { width: '100%'},
+                                '& > :not(style)': { mb: 2, width: '100%' },
+                            }}                    
+                        >
+                            <TextField name="name" label="Type character name" variant="outlined" />
+                        </Box>
+                        <Box
+                            component="div"
+                            sx={{
+                                '&': { width: '100%', color: 'black', height: '100%', overflowY: 'scroll'},
+                                '& > :not(style)': { mb: 2, width: '100%' },
+                                '& > :not(style):last-child': { mb: 0 },
+                                '& .MuiFormGroup-root': { pl: 2 }
+                                }}
+                            >
+                            <FormControl>
+                                <FormLabel id="status">Character Status</FormLabel>
+                                <RadioGroup
+                                    aria-labelledby="character-status"                                    
+                                    name="status"
+                                    id='status'
+                                    value={status}
+                                >
+                                    <FormControlLabel value="alive" control={<Radio />} label="Alive" />
+                                    <FormControlLabel value="dead" control={<Radio />} label="Dead" />
+                                    <FormControlLabel value="unknown" control={<Radio />} label="Unknown" />
+                                </RadioGroup>
+                            </FormControl>
+                            <FormControl>
+                                <FormLabel id="species">Character Species</FormLabel>
+                                <RadioGroup
+                                    aria-labelledby="character-species"
+                                    name="species"
+                                    id="species"
+                                    value={species}
+                                >
+                                    <FormControlLabel value="alien" control={<Radio />} label="Alien" />
+                                    <FormControlLabel value="human" control={<Radio />} label="Human" />                            
+                                </RadioGroup>
+                            </FormControl>
+                            <FormControl>
+                                <FormLabel id="gender">Character Gender</FormLabel>
+                                <RadioGroup
+                                    aria-labelledby="character-gender"
+                                    name="gender"
+                                    id="gender"                                    
+                                >
+                                    <FormControlLabel value="male" control={<Radio />} label="Male" />
+                                    <FormControlLabel value="female" control={<Radio />} label="Female" />
+                                    <FormControlLabel value="genderless" control={<Radio />} label="Genderless" />
+                                    <FormControlLabel value="unknown" control={<Radio />} label="Unknown" />
+                                </RadioGroup>
+                            </FormControl>
+                        </Box>
+                        <Box
+                            component="div"
+                            sx={{
+                                '&': { pt: 2, textAlign: 'center' },
+                            }}                    
+                            >
+                            <Button variant="outlined" onClick={handleSubmitButton}>Submit</Button>
+                        </Box>
+                    </Box>                                
+                </CharacterFilterForm>
+                <CharacterFilterButton onClick={handleClick}>
+                    { isFormOpened ? (
+                        <CloseIcon />
+                    ): (
+                        <TuneIcon />
+                    )}
+                </CharacterFilterButton>
                 
+            </>
+        );
     }
-
-    const handleFormChange = (e) => {        
-        filterData[e.target.name] = e.target.value;
-        //setFilterData(filterData);
-
-        console.log(filterData);
-
-        sendDataToParent(filterData);
-    }    
-
-    return (
-        <>            
-            <CharacterFilterForm
-                {...(isFormOpened ? { 'className': 'toggle' } : {})}
-            >                
-                <Box
-                    component="form"
-                    sx={{
-                    '&': { width: '100%', color: 'black', height: '100%'},
-                    '& > :not(style)': { mb: 2, width: '100%' },
-                    }}
-                    noValidate
-                    autoComplete="off"
-                    onChange={handleFormChange}
-                    >                    
-                    <TextField name="name" label="Type character name" variant="outlined" />
-                    <FormControl>
-                        <FormLabel id="status">Character Status</FormLabel>
-                        <RadioGroup
-                            aria-labelledby="character-status"
-                            defaultValue={filterData.status}
-                            name="status"
-                            id='status'
-                        >
-                            <FormControlLabel value="alive" control={<Radio />} label="Alive" />
-                            <FormControlLabel value="dead" control={<Radio />} label="Dead" />
-                            <FormControlLabel value="unknown" control={<Radio />} label="Unknown" />
-                        </RadioGroup>
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel id="species">Character Species</FormLabel>
-                        <RadioGroup
-                            aria-labelledby="character-species"
-                            defaultValue={filterData.species}
-                            name="species"
-                            id="species"
-                        >
-                            <FormControlLabel value="alien" control={<Radio />} label="Alien" />
-                            <FormControlLabel value="human" control={<Radio />} label="Human" />                            
-                        </RadioGroup>
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel id="gender">Character Gender</FormLabel>
-                        <RadioGroup
-                            aria-labelledby="character-gender"
-                            defaultValue={filterData.gender}
-                            name="gender"
-                            id="gender"
-                        >
-                            <FormControlLabel value="male" control={<Radio />} label="Male" />
-                            <FormControlLabel value="female" control={<Radio />} label="Female" />
-                            <FormControlLabel value="genderless" control={<Radio />} label="Genderless" />
-                            <FormControlLabel value="unknown" control={<Radio />} label="Unknown" />
-                        </RadioGroup>
-                    </FormControl>
-                    <Stack spacing={2} direction="row">
-                        <Button variant="outlined" onClick={handleSubmit}>Submit</Button>
-                    </Stack>
-                </Box>                
-            </CharacterFilterForm>
-            <CharacterFilterButton onClick={handleClick}>
-                { isFormOpened ? (
-                    <CloseIcon />
-                ): (
-                    <TuneIcon />
-                )}
-            </CharacterFilterButton>
-            
-        </>
-    );
-};
+)
 
 export default FilterForm;

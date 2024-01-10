@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import axios from 'axios';
 import CharacterCard from '../CharacterCard/characterCard';
 import Typography from '@mui/material/Typography';
@@ -37,42 +37,41 @@ const PaginationWrapper = styled.div(
 const CharactersList = () => {
   const [characters, setCharacters] = useState([]);
   const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);  
   const [query, setQuery] = useState('');
 
   // Callback function to receive data from child
-  const receiveDataFromChild = (dataFromChild) => {    
-    let query = `?page=${page}`;
-    // Update the state in the parent component with the data received from the child
-    //console.log(dataFromChild);
-    for (let key in dataFromChild) {
-      if (dataFromChild[key] !== '') {
-        console.log(dataFromChild[key]);
-        query += `&${key}=${dataFromChild[key]}`;
-      }      
-    }    
-    
-    console.log(query);  
+  const receiveDataFromChild = useCallback(
+    (name, status, species, gender) => {            
+      // Generating the query string
+      const queryParams = new URLSearchParams({
+        name,
+        status,
+        species,        
+        gender
+      });
       
-    setQuery(query);
-    setPage(1);
-  };
+      // Generating the final URL
+      const finalQuery = `&${queryParams.toString()}`;
+      setQuery(finalQuery);
+      setPage(1);
+    }, [])
 
-  useEffect(() => {
-    //let query = childData ? `?${childData}` : `?page=${page}`;
-    axios.get(`https://rickandmortyapi.com/api/character?page=${page}`)
+  useEffect(() => {    
+    axios.get(`https://rickandmortyapi.com/api/character?page=${page}${query}`)
       .then(response => {
         setCharacters(response.data.results);
         setTotalPages(response.data.info.pages);
+        console.log(response.error);
       })
-      .catch(error => { 
+      .catch(error => {        
         console.error('Error fetching characters:', error);        
       });
-  }, [page, totalPages, query]);
+  }, [page, totalPages, query]);  
 
-  const handleChange = (event, value) => {
+  const handleChange = (value) => {
     setPage(value);
-  };  
+  };
 
   return (
     <>
@@ -81,7 +80,7 @@ const CharactersList = () => {
           Rick and Morty Characters List
         </Typography>        
       </header>
-      <FilterForm sendDataToParent={receiveDataFromChild} />
+      <FilterForm sendDataToParent={receiveDataFromChild} />      
       <CharactersWrapper>
         {characters.map(character => (
           <CharacterCard key={character.id} character={character} />
@@ -94,8 +93,6 @@ const CharactersList = () => {
           <Pagination count={totalPages} page={page} onChange={handleChange} />
         </Stack>
       </PaginationWrapper>
-                  
-      {query && <p>Data from child: {query}</p>}
     </>
   );
 };
