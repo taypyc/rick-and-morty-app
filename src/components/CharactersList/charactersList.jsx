@@ -31,6 +31,8 @@ const PaginationWrapper = styled.div(
     bottom: 0;
     right: 0;
     left: 0;
+    height: ${theme.paginationHeight}px;
+    opacity: ${theme.baseOpacity};
 
     > div {
       display: inline-flex;

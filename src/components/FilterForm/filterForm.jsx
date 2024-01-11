@@ -41,7 +41,7 @@ const CharacterFilterForm = styled.div(
         position:fixed;
         right: 0;
         top: 0;
-        width: 30%;        
+        width: ${theme.sidebarWidth}%;      
         bottom: 0;
         z-index: 10;
         color: ${theme.white};
@@ -50,11 +50,12 @@ const CharacterFilterForm = styled.div(
         flex-direction: column;
         transform: translateX(100%);
         transition: all 1s cubic-bezier(0.6, -0.28, 0.74, 0.05);
-        padding: calc(${theme.spacing._20} * 2) ${theme.spacing._10};    
+        padding: calc(${theme.spacing._20} * 2) ${theme.spacing._10};
+        border: 1px solid ${theme.backBlack};
+        border-radius: ${theme.spacing._8} 0 0 ${theme.spacing._8};
 
         &.toggle {
-            transform: translateX(0);
-            box-shadow: -5px 0 25px ${theme.backBlack};
+            transform: translateX(0);            
         }
 
         ${theme.media.mobile(css`
