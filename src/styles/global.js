@@ -113,6 +113,22 @@ export const GlobalStyles = createGlobalStyle(
     *::selection {
       color: ${theme.primary};
       background: ${theme.backBlack};
+    }    
+    
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: ${theme.whitesmoke};
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: ${theme.black};
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: ${theme.gray};
     }
 
     img {

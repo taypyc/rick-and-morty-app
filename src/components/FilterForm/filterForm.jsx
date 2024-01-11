@@ -26,7 +26,7 @@ const CharacterFilterButton = styled.div(
         z-index: 11;
 
         &:hover {
-            opacity: .6
+            opacity: .8
         }
         
         &.toggle {
