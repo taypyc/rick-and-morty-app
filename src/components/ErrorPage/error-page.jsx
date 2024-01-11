@@ -3,7 +3,7 @@ import Typography from '@mui/material/Typography';
 import { useRouteError } from "react-router-dom";
 
 export default function ErrorPage() {
-  const error = useRouteError();
+  const error = useRouteError();  
 
   const ErrorWrapper = styled.div`
   ${({ theme }) => {    
@@ -33,7 +33,7 @@ export default function ErrorPage() {
       </header>
       <ErrorWrapper>        
         <p>
-          Page <i>{error.statusText.toLowerCase() || error.message.toLowerCase()}</i>
+          Page <i>{error.statusText || error.message}</i>
         </p>
       </ErrorWrapper>      
     </>

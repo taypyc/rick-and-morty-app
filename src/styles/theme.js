@@ -39,7 +39,7 @@ const media = {
     }
   `,
 }
-
+// eslint-disable-next-line
 export default {
   primary: '#FF9800',
   black: '#202329',

@@ -1,6 +1,10 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "The Rick and Morti Application",
+  "name": "The Rick and Morti Application",
+  "author" : { 
+    "name": "Serhii Avdieiev",
+    "site": "https://github.com/taypyc"
+  },
   "icons": [
     {
       "src": "favicon.ico",

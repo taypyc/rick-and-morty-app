@@ -15,13 +15,24 @@ const CharacterFilterButton = styled.div(
     ({ theme }) => css`
         position:fixed;
         right: 0;
-        top: ${theme.spacing._40};
+        top: 50%;
+        transform: translateY(-50%);
+        transition: all .5s cubic-bezier(0.6, -0.28, 0.74, 0.05);
         width: ${theme.spacing._40};
         height: ${theme.spacing._40}; 
         background: ${theme.backBlack};
         cursor: pointer;
         ${theme.mixins.flex};        
-        z-index: 11;        
+        z-index: 11;
+
+        &:hover {
+            opacity: .6
+        }
+        
+        &.toggle {
+            top: 0;
+            transform: translateY(0);
+        }
     `,
 )
 
@@ -30,7 +41,7 @@ const CharacterFilterForm = styled.div(
         position:fixed;
         right: 0;
         top: 0;
-        width: 25%;
+        width: 30%;        
         bottom: 0;
         z-index: 10;
         color: ${theme.white};
@@ -39,13 +50,20 @@ const CharacterFilterForm = styled.div(
         flex-direction: column;
         transform: translateX(100%);
         transition: all 1s cubic-bezier(0.6, -0.28, 0.74, 0.05);
-        padding: calc(${theme.spacing._40} * 2) ${theme.spacing._20} ${theme.spacing._20};
-        overflow: auto;
+        padding: calc(${theme.spacing._20} * 2) ${theme.spacing._10};    
 
         &.toggle {
             transform: translateX(0);
             box-shadow: -5px 0 25px ${theme.backBlack};
         }
+
+        ${theme.media.mobile(css`
+            width: 50%;
+        `)}
+
+        ${theme.media.phone(css`
+            width: 100%;
+        `)}
     `,
 )
 
@@ -55,7 +73,7 @@ const FilterForm = React.memo(
         const [isFormOpened, setIsFormOpened] = useState(false);
         const [name, setName] = useState('');
         const [status, setStatus] = useState('alive');
-        const [species, setSpecies] = useState('alien');        
+        const [species, setSpecies] = useState('human');
         const [gender, setGender] = useState('male');
         
         const handleClick = () => {
@@ -111,7 +129,7 @@ const FilterForm = React.memo(
                         <Box
                             component="div"
                             sx={{
-                                '&': { width: '100%', color: 'black', height: '100%', overflowY: 'scroll'},
+                                '&': { width: '100%', color: 'black', height: '100%', overflowY: 'auto'},
                                 '& > :not(style)': { mb: 2, width: '100%' },
                                 '& > :not(style):last-child': { mb: 0 },
                                 '& .MuiFormGroup-root': { pl: 2 }
@@ -138,8 +156,10 @@ const FilterForm = React.memo(
                                     id="species"
                                     value={species}
                                 >
-                                    <FormControlLabel value="alien" control={<Radio />} label="Alien" />
-                                    <FormControlLabel value="human" control={<Radio />} label="Human" />                            
+                                    <FormControlLabel value="human" control={<Radio />} label="Human" />
+                                    <FormControlLabel value="alien" control={<Radio />} label="Alien" />                                    
+                                    <FormControlLabel value="humanoid" control={<Radio />} label="Humanoid" />
+                                    <FormControlLabel value="cronenberg" control={<Radio />} label="Cronenberg" />                                    
                                 </RadioGroup>
                             </FormControl>
                             <FormControl>
@@ -147,7 +167,8 @@ const FilterForm = React.memo(
                                 <RadioGroup
                                     aria-labelledby="character-gender"
                                     name="gender"
-                                    id="gender"                                    
+                                    id="gender"
+                                    value={gender}
                                 >
                                     <FormControlLabel value="male" control={<Radio />} label="Male" />
                                     <FormControlLabel value="female" control={<Radio />} label="Female" />
@@ -166,7 +187,7 @@ const FilterForm = React.memo(
                         </Box>
                     </Box>                                
                 </CharacterFilterForm>
-                <CharacterFilterButton onClick={handleClick}>
+                <CharacterFilterButton {...(isFormOpened ? { 'className': 'toggle' } : {})} onClick={handleClick}>
                     { isFormOpened ? (
                         <CloseIcon />
                     ): (

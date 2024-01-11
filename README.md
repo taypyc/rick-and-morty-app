@@ -36,6 +36,6 @@ Run locally with
 ```
 git clone https://github.com/taypyc/rick-and-morty-app.git
 cd rick-and-morty-app
-npm install
-npm run dev
+npm i
+npm start
 ```

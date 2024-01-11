@@ -1,15 +1,36 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import CharactersList from './components/CharactersList.js';
-import CharacterCard from './components/CharacterCard.js';
+import React from 'react'
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import { ThemeProvider } from 'styled-components';
+import theme from './styles/theme';
+
+import { GlobalStyles } from './styles/global'
+import CharactersList from './components/CharactersList/charactersList';
+import CharacterDetails from './components/CharacterDetails/characterDetails';
+import ErrorPage from './components/ErrorPage/error-page';
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <CharactersList />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "character/:id",
+    element: <CharacterDetails />
+  }  
+]);
 
 function App() {
   return (
-    <Router>  
-      <Routes>
-        <Route exact path="/" component={CharactersList} />
-        <Route path="/character/:id" component={CharacterCard} />        
-      </Routes>
-    </Router>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles />      
+      <main>        
+        <RouterProvider router={router} />
+      </main>
+    </ThemeProvider>
   );
 }
 

@@ -1,16 +1,16 @@
 import { useCallback, useState, useEffect } from 'react';
-import axios from 'axios';
-import CharacterCard from '../CharacterCard/characterCard';
 import Typography from '@mui/material/Typography';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import axios from 'axios';
+import CharacterCard from '../CharacterCard/characterCard';
 import styled, { css } from 'styled-components';
 import FilterForm from '../FilterForm/filterForm';
 
 const CharactersWrapper = styled.div(
   ({ theme }) => css`
     gap: ${theme.spacing._24};
-    padding: ${theme.spacing._40} ${theme.spacing._16};
+    padding: ${theme.spacing._40} ${theme.spacing._16} calc(${theme.spacing._40} * 3);
     display: flex;
     overflow: hidden;
     align-items: center;
@@ -26,19 +26,24 @@ const PaginationWrapper = styled.div(
     text-align: center;
     color: ${theme.backBlack};
     background: ${theme.white};
-    padding: ${theme.spacing._24} 0;
+    padding: ${theme.spacing._12} 0;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
 
     > div {
       display: inline-flex;
     }
-  `    
+  `  
 )
 
 const CharactersList = () => {
   const [characters, setCharacters] = useState([]);
   const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(0);  
+  const [totalPages, setTotalPages] = useState(0);
   const [query, setQuery] = useState('');
+  const [error, setError] = useState('');
 
   // Callback function to receive data from child
   const receiveDataFromChild = useCallback(
@@ -61,16 +66,17 @@ const CharactersList = () => {
     axios.get(`https://rickandmortyapi.com/api/character?page=${page}${query}`)
       .then(response => {
         setCharacters(response.data.results);
-        setTotalPages(response.data.info.pages);
-        console.log(response.error);
+        setTotalPages(response.data.info.pages);        
       })
       .catch(error => {        
-        console.error('Error fetching characters:', error);        
+        setCharacters([]);
+        setError(error.response.data.error);        
       });
   }, [page, totalPages, query]);  
 
-  const handleChange = (value) => {
+  const handleChange = (e,value) => {
     setPage(value);
+    return e.target.innerText
   };
 
   return (
@@ -82,15 +88,15 @@ const CharactersList = () => {
       </header>
       <FilterForm sendDataToParent={receiveDataFromChild} />      
       <CharactersWrapper>
-        {characters.map(character => (
+        {characters.length ? characters.map(character => (
           <CharacterCard key={character.id} character={character} />
-        ))}        
+        )) : <Typography>{error}</Typography> }
       </CharactersWrapper>
 
       <PaginationWrapper>
-        <Stack spacing={2}>
-          <Typography>Page: {page}</Typography>
-          <Pagination count={totalPages} page={page} onChange={handleChange} />
+        <Stack spacing={1}>
+          <Typography variant="h6" component="p">Page: {page}</Typography>          
+          <Pagination count={totalPages} page={page} onChange={handleChange} shape="rounded" />
         </Stack>
       </PaginationWrapper>
     </>

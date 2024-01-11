@@ -28,7 +28,8 @@ const Container = styled.article(
 const ImgWrapper = styled.div(
   ({ theme }) => css`
     flex: 2;
-    width: 100%;
+    width: 100%;    
+    overflow: hidden;
 
     img {
       width: 100%;
@@ -36,11 +37,16 @@ const ImgWrapper = styled.div(
       margin: 0;      
       object-position: center;
       object-fit: cover;
+      transition: all .2s ease;
+
+      &:hover {
+        transform: scale(1.05);      
+      }
 
       ${theme.media.phone(css`
         height: 300px;
       `)}
-    }
+    }    
   `,
 )
 
