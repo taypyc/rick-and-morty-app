@@ -1,6 +1,7 @@
 {
   "short_name": "The Rick and Morti Application",
   "name": "The Rick and Morti Application",
+  "description": "The Rick and Morty Application based on the television show Rick and Morty",
   "author" : { 
     "name": "Serhii Avdieiev",
     "site": "https://github.com/taypyc"
