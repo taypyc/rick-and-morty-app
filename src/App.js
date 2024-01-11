@@ -7,8 +7,9 @@ import { ThemeProvider } from 'styled-components';
 import theme from './styles/theme';
 
 import { GlobalStyles } from './styles/global'
-import CharactersList from './components/CharactersList/charactersList';
-import CharacterDetails from './components/CharacterDetails/characterDetails';
+import CharactersList from './components/Character/List/charactersList';
+import CharacterDetails from './components/Character/Details/characterDetails';
+import EpisodeDetails from './components/Episode/Details/episodeDetails'
 import ErrorPage from './components/ErrorPage/error-page';
 
 const router = createBrowserRouter([
@@ -20,7 +21,11 @@ const router = createBrowserRouter([
   {
     path: "character/:id",
     element: <CharacterDetails />
-  }  
+  },
+  {
+    path: "episode/:id",
+    element: <EpisodeDetails />
+  }
 ]);
 
 function App() {

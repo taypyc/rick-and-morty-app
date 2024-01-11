@@ -127,7 +127,7 @@ const ContentWrapper = styled.div`
   }}
 `
 
-const CharacterCard = ({ character }) => {
+const EpisodeCard = ({ character }) => {
   return (
     <Container className='characterCard'>
       <ImgWrapper>
@@ -160,4 +160,4 @@ const CharacterCard = ({ character }) => {
   );
 };
 
-export default CharacterCard;
+export default EpisodeCard;
