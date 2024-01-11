@@ -3,9 +3,9 @@ import Typography from '@mui/material/Typography';
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
 import axios from 'axios';
-import CharacterCard from '../CharacterCard/characterCard';
+import CharacterCard from '../../Character/Card/characterCard';
 import styled, { css } from 'styled-components';
-import FilterForm from '../FilterForm/filterForm';
+import FilterForm from '../../FilterForm/filterForm';
 
 const CharactersWrapper = styled.div(
   ({ theme }) => css`

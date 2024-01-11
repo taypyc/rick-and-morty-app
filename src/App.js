@@ -9,21 +9,30 @@ import theme from './styles/theme';
 import { GlobalStyles } from './styles/global'
 import CharactersList from './components/Character/List/charactersList';
 import CharacterDetails from './components/Character/Details/characterDetails';
+import EpisodeList from './components/Episode/List/episodeList';
 import EpisodeDetails from './components/Episode/Details/episodeDetails'
 import ErrorPage from './components/ErrorPage/error-page';
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/",    
     element: <CharactersList />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "character/:id",
+    path: "/character",
+    element: <CharactersList />,
+  },
+  {
+    path: "/character/:id",
     element: <CharacterDetails />
   },
   {
-    path: "episode/:id",
+    path: "/episode",
+    element: <EpisodeList />
+  },
+  {
+    path: "/episode/:id",
     element: <EpisodeDetails />
   }
 ]);
