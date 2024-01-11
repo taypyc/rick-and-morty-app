@@ -152,10 +152,8 @@ const CharacterCard = ({ character }) => {
             {character.gender}
         </div>
         <div className="section">
-          <span className="text-gray">First seen in:</span>
-          <Link to={`/episode/${character.episode}[0]`}>
-            {character.location.name}
-          </Link>
+          <span className="text-gray">First seen in:</span>          
+            {character.location.name}          
         </div>
       </ContentWrapper>     
     </Container>
