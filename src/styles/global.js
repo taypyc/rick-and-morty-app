@@ -163,7 +163,7 @@ export const GlobalStyles = createGlobalStyle(
       `)}
 
       ${theme.media.phone(css`
-        font-size: ${theme.spacing.rem(75)};
+        font-size: ${theme.spacing.rem(40)};
       `)}
     }
 
@@ -175,7 +175,7 @@ export const GlobalStyles = createGlobalStyle(
       `)}
 
       ${theme.media.phone(css`
-        font-size: ${theme.spacing.rem(65)};
+        font-size: ${theme.spacing.rem(37)};
       `)}
     }
 
@@ -187,7 +187,7 @@ export const GlobalStyles = createGlobalStyle(
       `)}
 
       ${theme.media.phone(css`
-        font-size: ${theme.spacing.rem(55)};
+        font-size: ${theme.spacing.rem(34)};
       `)}
     }
 
@@ -199,7 +199,7 @@ export const GlobalStyles = createGlobalStyle(
       `)}
 
       ${theme.media.phone(css`
-        font-size: ${theme.spacing.rem(45)};
+        font-size: ${theme.spacing.rem(31)};
       `)}
     }
 
@@ -211,7 +211,7 @@ export const GlobalStyles = createGlobalStyle(
       `)}
 
       ${theme.media.phone(css`
-        font-size: ${theme.spacing.rem(35)};
+        font-size: ${theme.spacing.rem(28)};
       `)}
     }
 

@@ -84,11 +84,11 @@ const CharactersList = () => {
 
   return (
     <>
-      <header>        
+      <header>
         <h1>
           Rick and Morty Characters List
         </h1>
-      </header>        
+      </header>
       <FilterForm sendDataToParent={receiveDataFromChild} />      
       <CharactersWrapper>
         {characters.length ? characters.map(character => (
