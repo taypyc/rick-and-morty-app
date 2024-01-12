@@ -25,46 +25,16 @@ const Container = styled.article(
   `,
 );
 
-const ImgWrapper = styled.div(
-  ({ theme }) => css`
-    flex: 2;
-    width: 100%;    
-    overflow: hidden;
-
-    img {
-      width: 100%;
-      height: 100%;
-      margin: 0;      
-      object-position: center;
-      object-fit: cover;
-      transition: all .2s ease;
-
-      &:hover {
-        transform: scale(1.05);      
-      }
-
-      ${theme.media.phone(css`
-        height: 300px;
-      `)}
-    }    
-  `,
-)
-
 const ContentWrapper = styled.div`
-  ${({ theme, $status }) => {
-    const statusColor = {
-      alive: theme.green,
-      dead: theme.red,
-      unknown: theme.gray,
-    }
-
-    return css`
-      flex: 2;
+  ${({ theme }) => {
+    return css`      
       position: relative;
       padding: ${theme.spacing._12} ${theme.spacing._12};
       color: ${theme.white};
-      display: flex;
+      ${theme.mixins.flex};
+      flex: 1;
       flex-direction: column;
+      gap: ${theme.spacing._16};
 
       span,
       h2 {
@@ -94,31 +64,15 @@ const ContentWrapper = styled.div`
       }
 
       .section {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;        
+        ${theme.mixins.flex};
+        gap: ${theme.spacing._8};
       }
 
       ${theme.media.phone(css`
         .section + .section {
           margin-top: ${theme.spacing._20};
         }
-      `)}
-
-      .status {
-        display: flex;
-        align-items: center;
-        text-transform: capitalize;
-
-        &__icon {
-          height: ${theme.spacing._8};
-          width: ${theme.spacing._8};
-          margin-right: ${theme.spacing.rem(6)};
-          background: ${statusColor[$status]};
-          border-radius: 50%;
-        }
-      }
+      `)}      
 
       ${theme.media.phone(css`
         pointer-events: none;
@@ -127,33 +81,25 @@ const ContentWrapper = styled.div`
   }}
 `
 
-const EpisodeCard = ({ character }) => {
+const EpisodeCard = ({ episode }) => {
   return (
-    <Container className='characterCard'>
-      <ImgWrapper>
-        <Link to={`/character/${character.id}`}>
-          <img src={character.image} alt={character.name} />
-        </Link>
-      </ImgWrapper>
-      <ContentWrapper $status={character.status.toLowerCase()}>
+    <Container className='characterCard'>      
+      <ContentWrapper>
         <div className="section">
           <h2>
-            <Link to={`/character/${character.id}`}>
-              {character.name}
+            <Link to={`/episode/${episode.id}`}>
+              {episode.name}
             </Link>
-          </h2>          
-          <span className="status">
-            <span className="status__icon" /> {character.status} - {character.species}
-          </span>
+          </h2>
         </div>
 
         <div className="section">
-          <span className="text-gray">Gender:</span>
-            {character.gender}
+          <span className="text-gray">Air date:</span>
+          {episode.air_date}
         </div>
         <div className="section">
-          <span className="text-gray">First seen in:</span>
-          {character.location.name}
+          <span className="text-gray">episode:</span>          
+          {episode.episode}
         </div>
       </ContentWrapper>     
     </Container>
