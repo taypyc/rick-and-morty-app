@@ -18,8 +18,8 @@ const CharacterFilterButton = styled.div(
         top: 50%;
         transform: translateY(-50%);
         transition: all .5s cubic-bezier(0.6, -0.28, 0.74, 0.05);
-        width: ${theme.spacing._40};
-        height: ${theme.spacing._40}; 
+        width: ${theme.spacing._60};
+        height: ${theme.spacing._60};
         background: ${theme.backBlack};
         cursor: pointer;
         ${theme.mixins.flex};        
@@ -50,7 +50,7 @@ const CharacterFilterForm = styled.div(
         flex-direction: column;
         transform: translateX(100%);
         transition: all 1s cubic-bezier(0.6, -0.28, 0.74, 0.05);
-        padding: calc(${theme.spacing._20} * 2) ${theme.spacing._10};
+        padding: ${theme.spacing._60} ${theme.spacing._10};
         border: 1px solid ${theme.backBlack};
         border-radius: ${theme.spacing._8} 0 0 ${theme.spacing._8};
 

@@ -31,6 +31,7 @@ const PaginationWrapper = styled.div(
     bottom: 0;
     right: 0;
     left: 0;
+    z-index: 1;
     height: ${theme.paginationHeight}px;
     opacity: ${theme.baseOpacity};
 
@@ -64,17 +65,17 @@ const CharactersList = () => {
       setPage(1);
     }, [])
 
-  useEffect(() => {    
+  useEffect(() => {
     axios.get(`https://rickandmortyapi.com/api/character?page=${page}${query}`)
       .then(response => {
         setCharacters(response.data.results);
-        setTotalPages(response.data.info.pages);        
+        setTotalPages(response.data.info.pages);
       })
       .catch(error => {        
         setCharacters([]);
         setError(error.response.data.error);        
       });
-  }, [page, totalPages, query]);  
+  }, [page, totalPages, query]);
 
   const handleChange = (e,value) => {
     setPage(value);
@@ -84,10 +85,10 @@ const CharactersList = () => {
   return (
     <>
       <header>        
-        <Typography variant="h1">
+        <h1>
           Rick and Morty Characters List
-        </Typography>        
-      </header>
+        </h1>
+      </header>        
       <FilterForm sendDataToParent={receiveDataFromChild} />      
       <CharactersWrapper>
         {characters.length ? characters.map(character => (

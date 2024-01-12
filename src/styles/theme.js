@@ -76,5 +76,6 @@ export default {
     _32: rem(32),
     _36: rem(36),
     _40: rem(40),
+    _60: rem(60)
   },
 }

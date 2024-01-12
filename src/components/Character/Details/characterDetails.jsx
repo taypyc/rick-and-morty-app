@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import styled, { css } from 'styled-components';
-import Typography from '@mui/material/Typography';
 
 const CharacterCardWrapper = styled.div(
   ({theme}) => css`    
@@ -52,9 +51,9 @@ const CharacterDetails = () => {
       {character && (
         <>
           <header>            
-            <Typography variant="h1">
+            <h1>
               {character.name}
-            </Typography>
+            </h1>
           </header>
 
           <CharacterCardWrapper>

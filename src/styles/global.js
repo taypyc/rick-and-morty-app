@@ -81,6 +81,11 @@ export const GlobalStyles = createGlobalStyle(
     
     header {
       background: ${theme.white};
+      padding: ${theme.spacing.rem(40)};
+
+      & h1 {
+        color: ${theme.backBlack};
+      }
     }
 
     main {
@@ -142,53 +147,84 @@ export const GlobalStyles = createGlobalStyle(
     h3,
     h4,
     h5,
-    h6, {
-      margin: 0 0 ${theme.spacing.rem(20)};
+    h6, {      
       border: none;
       font-weight: 700;
-      z-index: 1;      
-
-      ${theme.media.mobile(css`
-        font-size: ${theme.spacing.rem(60)};
-      `)}
-
-      ${theme.media.phone(css`
-        font-size: ${theme.spacing.rem(50)};
-      `)}
+      z-index: 1;
+      line-height: 1.2;
+      text-align: center;
     }
 
     h1 {
-      font-size: ${theme.spacing.rem(90)};
-      text-align: center;
-      color: ${theme.backBlack};
+      font-size: ${theme.spacing.rem(90)};      
 
       ${theme.media.mobile(css`
-        font-size: ${theme.spacing.rem(60)};
+        font-size: ${theme.spacing.rem(80)};
       `)}
 
       ${theme.media.phone(css`
-        font-size: ${theme.spacing.rem(50)};
+        font-size: ${theme.spacing.rem(75)};
       `)}
     }
 
     h2 {
       font-size: ${theme.spacing.rem(80)};
+
+      ${theme.media.mobile(css`
+        font-size: ${theme.spacing.rem(70)};
+      `)}
+
+      ${theme.media.phone(css`
+        font-size: ${theme.spacing.rem(65)};
+      `)}
     }
 
     h3 {
       font-size: ${theme.spacing.rem(70)};
+
+      ${theme.media.mobile(css`
+        font-size: ${theme.spacing.rem(60)};
+      `)}
+
+      ${theme.media.phone(css`
+        font-size: ${theme.spacing.rem(55)};
+      `)}
     }
 
     h4 {
       font-size: ${theme.spacing.rem(60)};
+
+      ${theme.media.mobile(css`
+        font-size: ${theme.spacing.rem(50)};
+      `)}
+
+      ${theme.media.phone(css`
+        font-size: ${theme.spacing.rem(45)};
+      `)}
     }
 
     h5 {
       font-size: ${theme.spacing.rem(50)};
+
+      ${theme.media.mobile(css`
+        font-size: ${theme.spacing.rem(40)};
+      `)}
+
+      ${theme.media.phone(css`
+        font-size: ${theme.spacing.rem(35)};
+      `)}
     }
 
     h6 {
       font-size: ${theme.spacing.rem(40)};
+
+      ${theme.media.mobile(css`
+        font-size: ${theme.spacing.rem(30)};
+      `)}
+
+      ${theme.media.phone(css`
+        font-size: ${theme.spacing.rem(25)};
+      `)}
     }
 
     p {      

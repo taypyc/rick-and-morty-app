@@ -65,16 +65,12 @@ const ContentWrapper = styled.div`
       color: ${theme.white};
       display: flex;
       flex-direction: column;
-
-      span,
-      h2 {
-        margin: 0;
-        padding: 0;
-      }
-
-      h2 {
+      
+      h6 {
+        margin: 0 0 ${theme.spacing.rem(20)};
+        text-align: left;
         font-size: ${theme.spacing._24};
-      }
+      }      
 
       span {
         font-size: 16px;
@@ -118,11 +114,7 @@ const ContentWrapper = styled.div`
           background: ${statusColor[$status]};
           border-radius: 50%;
         }
-      }
-
-      ${theme.media.phone(css`
-        pointer-events: none;
-      `)}
+      }      
     `
   }}
 `
@@ -137,11 +129,11 @@ const CharacterCard = ({ character }) => {
       </ImgWrapper>
       <ContentWrapper $status={character.status.toLowerCase()}>
         <div className="section">
-          <h2>
+          <h6>
             <Link to={`/character/${character.id}`}>
               {character.name}
             </Link>
-          </h2>          
+          </h6>
           <span className="status">
             <span className="status__icon" /> {character.status} - {character.species}
           </span>
