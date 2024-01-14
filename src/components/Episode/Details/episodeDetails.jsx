@@ -33,8 +33,7 @@ const CharactersWrapper = styled.div(
 
 const EpisodeDetails = () => {
   const { id } = useParams();
-  const [ episode, setEpisode ] = useState(null);
-  const [ character, setCharacter ] = useState([]);  
+  const [ episode, setEpisode ] = useState(null);  
 
   useEffect(() => {
     axios.get(`https://rickandmortyapi.com/api/episode/${id}`)
@@ -44,40 +43,21 @@ const EpisodeDetails = () => {
       .catch(error => {
         console.error('Error fetching character details:', error);
       });
-  }, [id]);
-
-  useEffect(() => {    
-    console.log('Start');
-    axios.get(`https://rickandmortyapi.com/api/character/24`)
-      .then(response => {
-        //console.log(response.data);        
-        setCharacter(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching character details:', error);
-      });
-  }, []);
+  }, [id]);  
   
-  return (
-    //console.log(characters),
+  return (    
     <>
       {episode && (
         <>
-          <header>            
+          <header>
             <h1>
               {episode.name}
             </h1>
           </header>
 
-          <EpisodeInfo>          
+          <EpisodeInfo>
             <p>Air date: {episode.air_date}</p>
-            <p>Episode: {episode.episode}</p>            
-            <p>Characters of the episode: </p>
-            
-            {character ? 
-              <CharacterCard key={character.id} character={character} /> 
-              : console.log('asdasdsad', character)
-            }
+            <p>Episode: {episode.episode}</p>
           </EpisodeInfo>
         </>
       )}
