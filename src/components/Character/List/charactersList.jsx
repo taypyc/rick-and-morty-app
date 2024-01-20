@@ -9,13 +9,13 @@ import FilterForm from '../../FilterForm/filterForm';
 
 const CharactersWrapper = styled.div(
   ({ theme }) => css`
-    gap: ${theme.spacing._24};
+    gap: ${theme.spacing._40};
     padding: ${theme.spacing._40} ${theme.spacing._16} calc(${theme.spacing._40} * 3);
     display: flex;
     overflow: hidden;
     align-items: center;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: center;    
     background: ${theme.backBlack};    
   `,
 )

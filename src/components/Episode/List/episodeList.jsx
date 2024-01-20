@@ -8,7 +8,7 @@ import styled, { css } from 'styled-components';
 
 const EpisodesWrapper = styled.div(
   ({ theme }) => css`
-    gap: ${theme.spacing._24};
+    gap: ${theme.spacing._40};
     padding: ${theme.spacing._40} ${theme.spacing._16} calc(${theme.spacing._40} * 3);
     display: flex;
     overflow: hidden;

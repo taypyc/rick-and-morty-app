@@ -6,7 +6,8 @@ import {
 import { ThemeProvider } from 'styled-components';
 import theme from './styles/theme';
 
-import { GlobalStyles } from './styles/global'
+import { GlobalStyles } from './styles/global';
+import HomePage from './components/HomePage/homePage';
 import CharactersList from './components/Character/List/charactersList';
 import CharacterDetails from './components/Character/Details/characterDetails';
 import EpisodeList from './components/Episode/List/episodeList';
@@ -17,8 +18,8 @@ import ErrorPage from './components/ErrorPage/error-page';
 
 const router = createBrowserRouter([
   {
-    path: "/",    
-    element: <CharactersList />,
+    path: "/",
+    element: <HomePage />,
     errorElement: <ErrorPage />,
   },
   {
