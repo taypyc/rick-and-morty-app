@@ -2,10 +2,8 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import styled, { css } from 'styled-components';
-// eslint-disable-next-line
-import CharacterCard from '../../Character/Card/characterCard';
 
-const EpisodeInfo = styled.div(
+const LocationInfo = styled.div(
   ({theme}) => css`
     ${theme.mixins.flex};
     flex-direction: column;
@@ -17,14 +15,14 @@ const EpisodeInfo = styled.div(
   `,
 )
 
-const EpisodeDetails = () => {
+const LocationDetails = () => {
   const { id } = useParams();
-  const [ episode, setEpisode ] = useState(null);  
+  const [ location, setLocation ] = useState(null);  
 
   useEffect(() => {
-    axios.get(`https://rickandmortyapi.com/api/episode/${id}`)
+    axios.get(`https://rickandmortyapi.com/api/location/${id}`)
       .then(response => {
-        setEpisode(response.data);        
+        setLocation(response.data);        
       })
       .catch(error => {
         console.error('Error fetching character details:', error);
@@ -33,22 +31,22 @@ const EpisodeDetails = () => {
   
   return (    
     <>
-      {episode && (
+      {location && (
         <>
           <header>
             <h1>
-              {episode.name}
+              {location.name}
             </h1>
           </header>
 
-          <EpisodeInfo>
-            <p>Air date: {episode.air_date}</p>
-            <p>Episode: {episode.episode}</p>
-          </EpisodeInfo>
+          <LocationInfo>
+            <p>Location type: {location.type}</p>
+            <p>Location dimension: {location.dimension}</p>
+          </LocationInfo>
         </>
       )}
     </>
   );
 };
 
-export default EpisodeDetails;
+export default LocationDetails;

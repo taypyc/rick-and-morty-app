@@ -16,8 +16,7 @@ const CharactersWrapper = styled.div(
     align-items: center;
     flex-wrap: wrap;
     justify-content: center;
-    background: ${theme.backBlack};
-    box-shadow: ${theme.shadows.md};
+    background: ${theme.backBlack};    
   `,
 )
 
