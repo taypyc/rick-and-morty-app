@@ -2,9 +2,9 @@ import { Link } from "react-router-dom";
 import styled, { css } from 'styled-components';
 
 const NavBlockWrapper = styled.nav(
-    ({ theme }) => css`          
+    ({ theme }) => css`        
         gap: ${theme.spacing._40};
-        padding: ${theme.spacing._40} ${theme.spacing._16};
+        padding: ${theme.spacing._40};
         display: flex;
         overflow: hidden;
         align-items: center;
@@ -15,6 +15,8 @@ const NavBlockWrapper = styled.nav(
         ${theme.media.phone(css`
             flex-direction: column;
             height: initial;
+            gap: ${theme.spacing._16};
+            padding: ${theme.spacing._16};
         `)}
     `,
 )
